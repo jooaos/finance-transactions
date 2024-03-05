@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/jooaos/pismo/internal/utils"
 )
 
 func main() {
@@ -11,7 +12,7 @@ func main() {
 	fmt.Printf("Intializing server...")
 
 	app.Get("/healthz", func(c *fiber.Ctx) error {
-		return c.JSON("Ok")
+		return c.JSON(utils.NewApiSuccessResponse("Ok"))
 	})
 
 	app.Listen(":8080")
