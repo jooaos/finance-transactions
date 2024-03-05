@@ -4,8 +4,12 @@ WORKDIR /app
 
 COPY . .
 
+RUN go mod download
+
 RUN go build -o pismo ./cmd/api
 
 FROM alpine:3.18
 
 COPY --from=build /app/pismo /usr/local/bin
+
+EXPOSE 8080
