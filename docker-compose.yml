@@ -13,6 +13,7 @@ services:
       - ENVIROMENT=local
     networks:
       - pismo
+    restart: on-failure:10
     depends_on:
       - db
   
