@@ -1,4 +1,4 @@
-package models
+package model
 
 type Transactions struct {
 	ID              int     `json:"id"`
