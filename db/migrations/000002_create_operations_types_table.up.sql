@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `operations_types` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `description` VARCHAR(150) NOT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT NOW(),
+    `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+);
