@@ -11,5 +11,6 @@ RUN go build -o pismo ./cmd/api
 FROM alpine:3.18
 
 COPY --from=build /app/pismo /usr/local/bin
+COPY --from=build /app/.env .
 
 EXPOSE 8080
