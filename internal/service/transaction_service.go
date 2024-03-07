@@ -1,6 +1,8 @@
 package service
 
 import (
+	"log"
+
 	"github.com/jooaos/pismo/internal/model"
 	"github.com/jooaos/pismo/internal/repository"
 )
@@ -27,16 +29,19 @@ func NewTransactionService(
 func (tr *TransactionService) CreateTransaction(accountId, operationTypeId int, amount float32) (*model.Transaction, error) {
 	_, err := tr.accountRepository.GetById(uint32(accountId))
 	if err != nil {
+		log.Printf("[TransactionService::CreateTransaction] Account not found")
 		return nil, ErrAccountNotFound
 	}
 
 	chekOperationType := model.ValidateOperationType(operationTypeId)
 	if !chekOperationType {
+		log.Printf("[TransactionService::CreateTransaction] Operation type is not correct")
 		return nil, ErrOperationTypeNotFound
 	}
 
 	checkAmount := model.ValidateAmount(operationTypeId, amount)
 	if !checkAmount {
+		log.Printf("[TransactionService::CreateTransaction] Amount is not correct")
 		return nil, ErrTransactionAmountNotAllowed
 	}
 
@@ -44,6 +49,7 @@ func (tr *TransactionService) CreateTransaction(accountId, operationTypeId int, 
 
 	result, err := tr.transactionRepository.Create(transaction)
 	if err != nil {
+		log.Printf("[TransactionService::CreateTransaction] Error while creating account: %s", err.Error())
 		return nil, err
 	}
 

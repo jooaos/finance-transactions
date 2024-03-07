@@ -1,6 +1,8 @@
 package service
 
 import (
+	"log"
+
 	"github.com/jooaos/pismo/internal/model"
 	"github.com/jooaos/pismo/internal/repository"
 )
@@ -23,6 +25,7 @@ func NewAccountService(accountRepository repository.IAccountResponsitory) *Accou
 func (ac *AccountService) Create(documentNumber string) (*model.Account, error) {
 	validate := ac.validateDocument(documentNumber)
 	if !validate {
+		log.Printf("[AccountService::Create] Document number is not valid")
 		return nil, ErrDocumentMustHave11Digits
 	}
 
@@ -33,6 +36,7 @@ func (ac *AccountService) Create(documentNumber string) (*model.Account, error) 
 
 	result, err := ac.accountRepository.Create(model.NewAccount(documentNumber))
 	if err != nil {
+		log.Printf("[AccountService::Create] Error while creating account: %s", err.Error())
 		return nil, err
 	}
 
@@ -45,6 +49,7 @@ func (ac *AccountService) GetById(id uint32) (*model.Account, error) {
 		return account, nil
 	}
 
+	log.Printf("[AccountService::GetById] Error while getting account: %s", err.Error())
 	return nil, err
 }
 
