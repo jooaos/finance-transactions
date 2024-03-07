@@ -8,14 +8,12 @@ attach-app:
 attach-db:
 	@docker compose exec app sh
 
-migration-create:
-	@docker compose --profile tools run --rm migrate ${DB_CONNECTION} create -ext sql -seq -dir /migrations/ ${NAME}
+down-swagger:
+	@docker compose --profile tools down swagger
 
-migration-up:
-	@docker compose --profile tools run --rm migrate ${DB_CONNECTION} up
-
-migration-down:
-	@docker compose --profile tools run --rm migrate ${DB_CONNECTION} down
+down-all:
+	@docker compose down
+	@docker compose --profile tools down
 
 integration-test-migrate-up:
 	@docker compose --profile tools run --rm migrate ${DB_TEST_CONNECTION} up
@@ -26,14 +24,29 @@ integration-test-migrate-down:
 integration-test-run:
 	./scripts/test-integration-run.sh
 
+migration-create:
+	@docker compose --profile tools run --rm migrate ${DB_CONNECTION} create -ext sql -seq -dir /migrations/ ${NAME}
+
+migration-up:
+	@docker compose --profile tools run --rm migrate ${DB_CONNECTION} up
+
+migration-down:
+	@docker compose --profile tools run --rm migrate ${DB_CONNECTION} down
+
+unit-test:
+	@go test ./internal/...
+
 up:
-	@docker compose up
+	@docker compose up -d
 
 up-no-cache:
 	@docker compose up --build
 
-up-detached:
-	@docker compose up -d
+up-atttached:
+	@docker compose up
 
 up-db:
-	@docker compose up db
+	@docker compose up db -d
+
+up-swagger:
+	@docker compose --profile tools up swagger -d
