@@ -1,6 +1,10 @@
 package model
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestValidateAmount(t *testing.T) {
 	var cases = []struct {
@@ -51,11 +55,9 @@ func TestValidateAmount(t *testing.T) {
 	}
 
 	for _, item := range cases {
-		t.Run("ValidateAmount", func(t *testing.T) {
+		t.Run("should validate amount of transaction", func(t *testing.T) {
 			result := ValidateAmount(int(item.operationType), item.amount)
-			if result != item.result {
-				t.Errorf("Expected for operation type %d response be %t and got %t", item.operationType, item.result, result)
-			}
+			assert.Equal(t, result, item.result)
 		})
 	}
 }
