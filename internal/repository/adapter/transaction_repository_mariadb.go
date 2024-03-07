@@ -18,7 +18,7 @@ func NewTransactionRepositoryMariaDB(connection *gorm.DB) *TransactionRepository
 }
 
 func (tr *TransactionRepositoryMariaDB) Create(transaction *model.Transaction) (*model.Transaction, error) {
-	sql := "INSERT INTO transactions (account_id, operation_type_id, amount) VALUES (?,?,?)"
+	sql := "INSERT INTO transactions (account_id, operation_type_id, amount) VALUES (?,?,?) RETURNING *"
 
 	result := tr.conn.Raw(
 		sql,
