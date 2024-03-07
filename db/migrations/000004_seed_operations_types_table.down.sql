@@ -1,1 +1,0 @@
-DELETE FROM `operations_types` WHERE `id` <= 4;
