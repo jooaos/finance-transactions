@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  title: Pismo Challenge
+  description: Alguma coisa aqui
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: accounts
+    description: Details about accounts endpoints
+  - name: transactions
+    description: Details about transactions endpoints
+paths:
+  /accounts:
+    post:
+      tags:
+        - accounts
+      summary: Create a new account
+      description: Create a new account
+      operationId: addAccount
+      requestBody:
+        description: Create a new account
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCreateResponse'
+        '400':
+          description: Validation exception
+  /accounts/{accountId}:
+    get:
+      tags:
+        - accounts
+      summary: Get account by id
+      description: Get account by id
+      operationId: getAccountById
+      parameters:
+        - name: accountId
+          in: path
+          description: ID from account
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCreateResponse'
+        '400':
+          description: Validation exception
+  /transactions:
+    post:
+      tags:
+        - transactions
+      summary: Create a new transaction
+      description: Create a new transaction
+      operationId: addTransaction
+      requestBody:
+        description: Create a new transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCreateResponse'
+        '400':
+          description: Validation exception
+components:
+  schemas:
+    Account:
+      required:
+        - document_number
+      type: object
+      properties:
+        document_number:
+          type: string
+          example: 12345678900
+    AccountCreateResponse:
+      properties:
+        data:
+          allOf:
+             -  type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+             -  $ref: '#/components/schemas/Account'
+    Transaction:
+      required:
+        - account_id
+        - operation_type_id
+        - amount
+      type: object
+      properties:
+        account_id:
+          type: integer
+          example: 1
+        operation_type_id:
+          type: integer
+          enum: [1, 2, 3, 4]
+          example: 4
+        amount:
+          type: number
+          format: double
+          example: 20.20
+    TransactionCreateResponse:
+      properties:
+        data:
+          allOf:
+             -  type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+             -  $ref: '#/components/schemas/Transaction'
