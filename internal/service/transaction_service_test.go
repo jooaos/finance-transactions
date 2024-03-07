@@ -22,22 +22,22 @@ func TestTransactionService_CreateTransaction_Success(t *testing.T) {
 	}{
 		{
 			1,
-			int(model.A_VISTA),
+			int(model.CASH_PURCHASE),
 			-10.20,
 		},
 		{
 			1,
-			int(model.COMPRA_PARCELADA),
+			int(model.INSTALLMENT_PURCHASE),
 			-11.20,
 		},
 		{
 			1,
-			int(model.SAQUE),
+			int(model.WITHDRAWAL),
 			-12.20,
 		},
 		{
 			1,
-			int(model.PAGAMENTO),
+			int(model.PAYMENT),
 			13.20,
 		},
 	}
@@ -60,22 +60,22 @@ func TestTransactionService_CreateTransaction_Success(t *testing.T) {
 	}{
 		{
 			1,
-			int(model.A_VISTA),
+			int(model.CASH_PURCHASE),
 			10.20,
 		},
 		{
 			1,
-			int(model.COMPRA_PARCELADA),
+			int(model.INSTALLMENT_PURCHASE),
 			11.20,
 		},
 		{
 			1,
-			int(model.SAQUE),
+			int(model.WITHDRAWAL),
 			12.20,
 		},
 		{
 			1,
-			int(model.PAGAMENTO),
+			int(model.PAYMENT),
 			-13.20,
 		},
 	}

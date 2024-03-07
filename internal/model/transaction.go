@@ -17,11 +17,11 @@ func NewTransaction(accountId, operationTypeId int, amount float32) *Transaction
 
 func ValidateAmount(operationTypeId int, amount float32) bool {
 	switch operationTypeId {
-	case int(A_VISTA), int(COMPRA_PARCELADA), int(SAQUE):
+	case int(CASH_PURCHASE), int(INSTALLMENT_PURCHASE), int(WITHDRAWAL):
 		if amount >= 0 {
 			return false
 		}
-	case int(PAGAMENTO):
+	case int(PAYMENT):
 		if amount <= 0 {
 			return false
 		}

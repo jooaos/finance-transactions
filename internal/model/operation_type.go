@@ -3,10 +3,10 @@ package model
 type OperationTypeId int
 
 const (
-	A_VISTA          OperationTypeId = 1
-	COMPRA_PARCELADA OperationTypeId = 2
-	SAQUE            OperationTypeId = 3
-	PAGAMENTO        OperationTypeId = 4
+	CASH_PURCHASE        OperationTypeId = 1
+	INSTALLMENT_PURCHASE OperationTypeId = 2
+	WITHDRAWAL           OperationTypeId = 3
+	PAYMENT              OperationTypeId = 4
 )
 
 type OperationType struct {
@@ -25,9 +25,9 @@ func ValidateOperationType(operationType int) bool {
 
 func getAll() []OperationTypeId {
 	return []OperationTypeId{
-		A_VISTA,
-		COMPRA_PARCELADA,
-		SAQUE,
-		PAGAMENTO,
+		CASH_PURCHASE,
+		INSTALLMENT_PURCHASE,
+		WITHDRAWAL,
+		PAYMENT,
 	}
 }

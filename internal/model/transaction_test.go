@@ -13,42 +13,42 @@ func TestValidateAmount(t *testing.T) {
 		result        bool
 	}{
 		{
-			A_VISTA,
+			CASH_PURCHASE,
 			-10.0,
 			true,
 		},
 		{
-			A_VISTA,
+			CASH_PURCHASE,
 			10.0,
 			false,
 		},
 		{
-			COMPRA_PARCELADA,
+			INSTALLMENT_PURCHASE,
 			-10.0,
 			true,
 		},
 		{
-			COMPRA_PARCELADA,
+			INSTALLMENT_PURCHASE,
 			10.0,
 			false,
 		},
 		{
-			SAQUE,
+			WITHDRAWAL,
 			-10.0,
 			true,
 		},
 		{
-			SAQUE,
+			WITHDRAWAL,
 			10.0,
 			false,
 		},
 		{
-			PAGAMENTO,
+			PAYMENT,
 			-10.0,
 			false,
 		},
 		{
-			PAGAMENTO,
+			PAYMENT,
 			10.0,
 			true,
 		},

@@ -1,6 +1,6 @@
 INSERT INTO `operations_types` (`id`, `description`)
     VALUES 
-        (1, 'COMPRA A VISTA'),
-        (2, 'COMPRA PARCELADA'),
-        (3, 'SAQUE'),
-        (4, 'PAGAMENTO');
+        (1, 'CASH PURCHASE'),
+        (2, 'INSTALLMENT PURCHASE'),
+        (3, 'WITHDRAWAL'),
+        (4, 'PAYMENT');
