@@ -8,11 +8,15 @@ import (
 func main() {
 	app := fiber.New()
 
-	_ = InitDependenciesApi()
+	api := InitDependenciesApi()
 
 	app.Get("/healthz", func(c *fiber.Ctx) error {
 		return c.JSON(utils.NewApiSuccessResponse("Ok"))
 	})
+
+	app.Post("/accounts", api.Controllers.AccountController.Create)
+	app.Get("/accounts/:id", api.Controllers.AccountController.GetById)
+	app.Post("/transactions", api.Controllers.TransactionController.Create)
 
 	app.Listen(":8080")
 }
