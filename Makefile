@@ -1,6 +1,7 @@
 include .env
 
 DB_CONNECTION="mysql://${DB_USER}:${DB_PASSWORD}@tcp(${DB_HOST}:${DB_PORT})/${DB_NAME}?charset=utf8"
+DB_TEST_CONNECTION="mysql://${DB_USER}:${DB_PASSWORD}@tcp(${DB_HOST}:${DB_PORT})/${DB_TESTING_NAME}?charset=utf8"
 
 attach-app:
 	@docker compose exec app sh
