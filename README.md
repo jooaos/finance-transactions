@@ -72,8 +72,8 @@ make unit-test
 List of commands about migrations
 | Command                   | Action                                            |
 | -------                   | ------                                            |
-| `make migration up`       | Run the migrations that database needs            |
-| `make migration down`     | Rollback all migrations                           |
-| `make migration create`   | Create migration, and you can pass the `NAME=`    |
+| `make migration-up`       | Run the migrations that database needs            |
+| `make migration-down`     | Rollback all migrations                           |
+| `make migration-create`   | Create migration, and you can pass the `NAME=`    |
 
 
