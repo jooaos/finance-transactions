@@ -34,7 +34,7 @@ func (ac *AccountController) Create(c *fiber.Ctx) error {
 	err := c.BodyParser(request)
 	if err != nil {
 		log.Printf("[AccountController::Create] Error while parsing body: %s", err.Error())
-		return c.Status(500).JSON(utils.NewApiErrorResponse("error while parsing body"))
+		return c.Status(400).JSON(utils.NewApiErrorResponse("error while parsing body"))
 	}
 
 	if request.DocumentNumber == "" {
