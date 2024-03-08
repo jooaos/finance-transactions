@@ -15,6 +15,9 @@ down-all:
 	@docker compose down
 	@docker compose --profile tools down
 
+first-install:
+	./scripts/first-install.sh
+
 integration-test-migrate-up:
 	@docker compose --profile tools run --rm migrate ${DB_TEST_CONNECTION} up
 
@@ -32,6 +35,9 @@ migration-up:
 
 migration-down:
 	@docker compose --profile tools run --rm migrate ${DB_CONNECTION} down
+
+run:
+	@go run ./cmd/api/api.go ./cmd/api/init.go
 
 unit-test:
 	@go test ./internal/...
