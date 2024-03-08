@@ -45,10 +45,10 @@ func TestAccountControler_Create(t *testing.T) {
 	})
 
 	t.Run("should return error body parse", func(t *testing.T) {
-		req := httptest.NewRequest("POST", "/accounts", strings.NewReader(`{}}`))
+		req := httptest.NewRequest("POST", "/accounts", strings.NewReader(`{}`))
 		req.Header.Set("Content-Type", "application/json")
 		resp, _ := app.Test(req, -1)
-		assert.Equal(t, 500, resp.StatusCode)
+		assert.Equal(t, 400, resp.StatusCode)
 	})
 
 	SetDown()
