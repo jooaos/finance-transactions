@@ -13,6 +13,7 @@ type AccountBalanceService struct {
 
 type IAccountBalanceService interface {
 	GetByAccountId(accountId int) (*model.AccountBalance, error)
+	UpdateBalance(accountId int, balance float32) (*model.AccountBalance, error)
 }
 
 func NewAccountBalanceService(accountBalanceRepository repository.IAccountBalanceRepository) *AccountBalanceService {
@@ -24,7 +25,17 @@ func NewAccountBalanceService(accountBalanceRepository repository.IAccountBalanc
 func (ac *AccountBalanceService) GetByAccountId(accountId int) (*model.AccountBalance, error) {
 	result, err := ac.accountBalanceRespository.GetByAccountId(accountId)
 	if err != nil {
-		log.Printf("[AccountBalanceService::GetByAccountId] Document number is not valid")
+		log.Printf("[AccountBalanceService::GetByAccountId] Error while getting account balance: %s", err.Error())
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func (ac *AccountBalanceService) UpdateBalance(accountId int, balance float32) (*model.AccountBalance, error) {
+	result, err := ac.accountBalanceRespository.UpdateBalance(accountId, balance)
+	if err != nil {
+		log.Printf("[AccountBalanceService::UpdateBalance] Error while updating account balance: %s", err.Error())
 		return nil, err
 	}
 
